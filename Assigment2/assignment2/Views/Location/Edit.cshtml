@@ -1,0 +1,56 @@
+@model assignment2.Models.Location
+
+
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Edit</title>
+    </head>
+
+    <body>
+
+        <h4>Location</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="LocationId" />
+                    <div class="form-group">
+                        <label asp-for="BuildingId" class="control-label"></label>
+                        <input asp-for="BuildingId" class="form-control" />
+                        <span asp-validation-for="BuildingId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ZipCode" class="control-label"></label>
+                        <input asp-for="ZipCode" class="form-control" />
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ManagerName" class="control-label"></label>
+                        <select asp-items="@(new SelectList(@ViewBag.dataListLoactionV,"FirstName", "FirstName"))"
+                            class="form-control" asp-for="ManagerName" selected="@Model.ManagerName"></select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+    </body>
+
+</html>
