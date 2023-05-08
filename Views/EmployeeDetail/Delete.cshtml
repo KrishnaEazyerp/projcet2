@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Delete";
+}
+@model projet4.Models.EmployeeViewModel
+
+@using (Html.BeginForm("Delete", "EmployeeDetail", FormMethod.Get))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmployeeId)
+        @Html.TextBoxFor(model => model.EmployeeId, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Retrieve Employee</button>
+}

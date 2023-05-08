@@ -1,0 +1,107 @@
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Create";
+}
+
+@model projet4.Models.EmployeeViewModel
+
+@using (Html.BeginForm("Create", "Employee", FormMethod.Post, new
+{
+    enctype = "multipart/form-data"
+}))
+{
+    @* <div class="form-group">
+<div>
+@Html.LabelFor(model => model.EmployeeId)
+@Html.TextBoxFor(model => model.EmployeeId)
+</div>
+</div> *@
+    <form method="post" enctype="multipart/form-data" action="@Url.Action("Create")">
+
+
+        <div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName)
+                @Html.TextBoxFor(model => model.FirstName)
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.LastName)
+            @Html.TextBoxFor(model => model.LastName)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Salary)
+            @Html.TextBoxFor(model => model.Salary)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.DepartmentId)
+            @Html.DropDownListFor(model => model.DepartmentId, DepartmentList(), "Select Department")
+        </div>
+        <div class="form-group">
+            <label for="ImageFile">Profile Image</label>
+            <input type="file" id="ImageFile" name="ImageFile" class="form-control-file" />
+            @* <input type="file" name="imageFile" /> *@
+        </div>
+
+
+        <div>
+
+            @for (int i = 0; i < Model.Hobbies.Count; i++)
+            {
+                <label>
+                    @Html.CheckBoxFor(model => model.Hobbies[i].IsSelected)
+                    @Html.HiddenFor(model => model.Hobbies[i].Name)
+                    @Model.Hobbies[i].Name
+                </label>
+            }
+
+            @* @foreach (var hobby in Model.Hobbies)
+        {
+        <label>
+        @Html.CheckBoxFor(model => hobby.IsSelected)
+        @Html.HiddenFor(model => hobby.Name)
+        @hobby.Name
+        </label>
+        } *@
+
+        </div>
+
+        <div>
+            <label>Gender</label>
+            <div>
+                <label>
+                    @Html.RadioButtonFor(model => model.Gender, "M") Male
+                </label>
+                <label>
+                    @Html.RadioButtonFor(model => model.Gender, "F") Female
+                </label>
+            </div>
+        </div>
+
+        <input type="submit" value="Save" />
+    </form>
+}
+
+@functions {
+    public List<SelectListItem> DepartmentList()
+    {
+        // Retrieve department list from database or any other source
+        // and convert it to SelectListItem format
+        List<SelectListItem> departments = new List<SelectListItem>
+{
+new SelectListItem { Value = "1", Text = "Department 1" },
+new SelectListItem { Value = "2", Text = "Department 2" },
+new SelectListItem { Value = "3", Text = "Department 3" }
+};
+
+        return departments;
+    }
+}
